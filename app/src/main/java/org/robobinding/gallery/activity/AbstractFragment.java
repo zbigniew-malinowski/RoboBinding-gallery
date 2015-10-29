@@ -17,7 +17,7 @@ import android.view.MenuInflater;
 public abstract class AbstractFragment extends Fragment {
     protected ViewBinder createViewBinder() {
 	BinderFactory binderFactory = getReusableBinderFactory();
-	return binderFactory.createViewBinder(getActivity());
+	return binderFactory.createViewBinder(getActivity(), false);
     }
 
     private BinderFactory getReusableBinderFactory() {

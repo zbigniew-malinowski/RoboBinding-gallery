@@ -12,14 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- *
- * @since 1.0
- * @version $Revision: 1.0 $
  * @author Cheng Wei
+ * @version $Revision: 1.0 $
+ * @since 1.0
  */
 public class ListFragmentDemo extends AbstractFragment {
     private ListFragmentDemoPresentationModel presentationModel;
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,10 +27,16 @@ public class ListFragmentDemo extends AbstractFragment {
         productStore.reset();
         presentationModel = new ListFragmentDemoPresentationModel(getActivity(), productStore.getAll());
     }
-    
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-	ViewBinder viewBinder = createViewBinder();
-	return viewBinder.inflateAndBindWithoutAttachingToRoot(R.layout.fragment_list_demo, presentationModel, container);
+        ViewBinder viewBinder = createViewBinder();
+        return viewBinder.inflateAndBindWithoutAttachingToRoot(R.layout.fragment_list_demo, presentationModel, container);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presentationModel.getPresentationModelChangeSupport().refreshPresentationModel();
     }
 }
